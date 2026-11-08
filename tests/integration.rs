@@ -331,7 +331,7 @@ fn webp_alpha_z0_matches_dwebp() {
 fn webp_lossy_rejected() {
     // synthesize a VP8 (lossy) container: must produce a clear error
     let mut v = b"RIFF\x2c\x00\x00\x00WEBPVP8 \x20\x00\x00\x00".to_vec();
-    v.extend(std::iter::repeat(0u8).take(0x20));
+    v.extend(std::iter::repeat_n(0u8, 0x20));
     let err = webp::decode(&v).unwrap_err();
     assert!(err.to_string().contains("lossy"), "{err}");
 }
